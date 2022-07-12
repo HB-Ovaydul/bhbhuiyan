@@ -65,13 +65,13 @@
 												</a>
 											</li>
 											<li>
-												<a href="profile-settings.html">
+												<a href="{{ route('patient.prof.settings') }}">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>
 											</li>
 											<li>
-												<a href="change-password.html">
+												<a href="{{ route('patient.change.pass') }}">
 													<i class="fas fa-lock"></i>
 													<span>Change Password</span>
 												</a>

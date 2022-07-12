@@ -57,6 +57,22 @@
 		
 		<!-- Custom JS -->
 		<script src="{{ asset('frontend/assets/js/script.js') }}"></script>
+
+	
+	<script>
+		$('#show_pass').change(function(){
+
+       let attr = $('#pass').attr('type');
+
+	   if(attr == 'password'){
+		$('#pass').attr('type', 'text');
+	   }else{
+		$('#pass').attr('type', 'password');
+	   }
+	});
+	</script>
+
+	
 		
 	</body>
 

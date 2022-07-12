@@ -20,7 +20,7 @@ class AuthMiddleware
         if(Auth::guard('patient') -> check()){
             return $next($request);
         }else{
-            return redirect() -> route('show.login.page');
+            return redirect() -> route('show.login.page') -> with('warning', 'Please Sign Up Or Register');
         }
         
     }

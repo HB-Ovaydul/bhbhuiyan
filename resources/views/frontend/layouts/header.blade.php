@@ -52,8 +52,8 @@
 									<li><a href="{{ route('patient.deshboard.page') }}">Patient Dashboard</a></li>
 									<li><a href="favourites.html">Favourites</a></li>
 									<li><a href="chat.html">Chat</a></li>
-									<li><a href="profile-settings.html">Profile Settings</a></li>
-									<li><a href="change-password.html">Change Password</a></li>
+									<li><a href="{{ route('patient.prof.settings') }}">Profile Settings</a></li>
+									<li><a href="{{ route('patient.change.pass') }}">Change Password</a></li>
 								</ul>
 							</li>	
 							<li class="has-submenu">
@@ -114,7 +114,7 @@
 									</div>
 								</div>
 								<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
-								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+								<a class="dropdown-item" href="{{ route('patient.prof.settings') }}">Profile Settings</a>
 								<a class="dropdown-item" href="{{ route('patient.logout') }}">Logout</a>
 							</div>
 						</li>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\PatientAuthController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\Settings\PatientprofileSettingsController;
 
 /**
  * Frontend Routes
@@ -20,6 +21,14 @@ use App\Http\Controllers\frontend\FrontendController;
   Route::post('/patient-register' ,[PatientAuthController::class,'PatientRegister'])->name('patient.register');
   Route::post('/patient-login' ,[PatientAuthController::class,'PatientLogin'])->name('patient.login');
   Route::get('/patient-logout' ,[PatientAuthController::class,'Logout'])->name('patient.logout');
+
+  /**
+   * Patient Profile Sidbar routes
+   */
+  Route::get('/patient-Profile-settings' ,[PatientprofileSettingsController::class,'ShowPatientProfSettings'])->name('patient.prof.settings');
+  Route::get('/patient-change-password' ,[PatientprofileSettingsController::class,'ShowPatientChangePass'])->name('patient.change.pass');
+  Route::post('/change-password' ,[PatientprofileSettingsController::class,'ChangePassword'])->name('change.password');
+
 
  /**
   * Doctor Routes

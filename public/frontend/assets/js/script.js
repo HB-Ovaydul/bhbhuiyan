@@ -356,5 +356,8 @@ Version      : 1.0
 		animateElements();
 	}
 	$(window).scroll(animateElements);
+
 	
+
+
 })(jQuery);

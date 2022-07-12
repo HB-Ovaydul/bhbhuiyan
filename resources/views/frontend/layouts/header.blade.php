@@ -95,9 +95,36 @@
 								<p class="contact-info-header"> +1 315 369 5943</p>
 							</div>
 						</li>
+
+						@if (Auth::guard('patient') -> check())
+						<li class="nav-item dropdown has-arrow logged-item">
+							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+								<span class="user-img">
+									<img class="rounded-circle" src="frontend/assets/img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="user-header">
+									<div class="avatar avatar-sm">
+										<img src="frontend/assets/img/patients/patient.jpg" alt="User Image" class="avatar-img rounded-circle">
+									</div>
+									<div class="user-text">
+										<h6>Richard Wilson</h6>
+										<p class="text-muted mb-0">Patient</p>
+									</div>
+								</div>
+								<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
+								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+								<a class="dropdown-item" href="{{ route('patient.logout') }}">Logout</a>
+							</div>
+						</li>
+						@endif
+
+						@if (!Auth::guard('patient') -> check())
 						<li class="nav-item">
 							<a class="nav-link header-login" href="{{ route('show.login.page') }}">login / Signup </a>
 						</li>
+						@endif
 					</ul>
 				</nav>
 			</header>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\PatientAuthController;
 use App\Http\Controllers\frontend\FrontendController;
 
 /**
@@ -15,7 +16,10 @@ use App\Http\Controllers\frontend\FrontendController;
   */
 
   Route::get('/patient-register-page' ,[FrontendController::class,'ShowPatientRegPage'])->name('patient.rag.page');
-  Route::get('/patient-deshboard' ,[FrontendController::class,'ShowPatientDeshPage'])->name('patient.deshboard.page');
+  Route::get('/patient-deshboard' ,[FrontendController::class,'ShowPatientDeshPage'])->name('patient.deshboard.page') -> middleware('patient');
+  Route::post('/patient-register' ,[PatientAuthController::class,'PatientRegister'])->name('patient.register');
+  Route::post('/patient-login' ,[PatientAuthController::class,'PatientLogin'])->name('patient.login');
+  Route::get('/patient-logout' ,[PatientAuthController::class,'Logout'])->name('patient.logout');
 
  /**
   * Doctor Routes

@@ -17,26 +17,30 @@
 										<div class="login-header">
 											<h3>Patient Register <a href="{{ route('doctor.rag.page') }}">Are you a Doctor?</a></h3>
 										</div>
+
+										@include('frontend.validate')
 										
 										<!-- Register Form -->
-										<form action="https://dreamguys.co.in/demo/doccure/doctor-dashboard.html">
+										<form action="{{ route('patient.register') }}" method="POST">
+											@csrf
 											<div class="form-group form-focus">
-												<input type="text" class="form-control floating">
+												<input name="first_name" type="text" class="form-control floating">
 												<label class="focus-label">Name</label>
 											</div>
 											<div class="form-group form-focus">
-												<input type="text" class="form-control floating">
+												<input name="email" type="text" class="form-control floating">
 												<label class="focus-label">Email</label>
 											</div>
 											<div class="form-group form-focus">
-												<input type="text" class="form-control floating">
+												<input name="mobile" type="text" class="form-control floating">
 												<label class="focus-label">Mobile Number</label>
 											</div>
 											<div class="form-group form-focus">
-												<input type="password" class="form-control floating">
+												<input name="password" type="password" class="form-control floating">
 												<label class="focus-label">Create Password</label>
 											</div>
-												<input type="password" class="form-control floating">
+											<div class="form-group form-focus">
+												<input name="password_confirmation" type="password" class="form-control floating">
 												<label class="focus-label">Confirm Password</label>
 											</div>
 											<div class="text-right">

@@ -21,7 +21,7 @@
 										@include('frontend.validate')
 										
 										<!-- Register Form -->
-										<form action="{{ route('patient.register') }}" method="POST">
+										<form action="{{ route('patient.register') }}" method="POST" enctype="multipart/form-data">
 											@csrf
 											<div class="form-group form-focus">
 												<input name="first_name" type="text" class="form-control floating">

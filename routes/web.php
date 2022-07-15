@@ -25,9 +25,10 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
   /**
    * Patient Profile Sidbar routes
    */
-  Route::get('/patient-Profile-settings' ,[PatientprofileSettingsController::class,'ShowPatientProfSettings'])->name('patient.prof.settings');
-  Route::get('/patient-change-password' ,[PatientprofileSettingsController::class,'ShowPatientChangePass'])->name('patient.change.pass');
-  Route::post('/change-password' ,[PatientprofileSettingsController::class,'ChangePassword'])->name('change.password');
+  Route::get('/patient-Profile-settings' ,[PatientprofileSettingsController::class,'ShowPatientProfSettings'])->name('patient.prof.settings') -> middleware('patient');
+  Route::get('/patient-change-password' ,[PatientprofileSettingsController::class,'ShowPatientChangePass']) ->name('patient.change.pass') -> middleware('patient');
+  Route::post('/change-password' ,[PatientprofileSettingsController::class,'ChangePassword'])->name('change.password') -> middleware('patient');
+  Route::post('/edit-profile' ,[PatientprofileSettingsController::class,'EditPatientProf'])->name('edit.profile');
 
 
  /**

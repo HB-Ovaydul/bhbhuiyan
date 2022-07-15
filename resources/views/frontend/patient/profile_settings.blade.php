@@ -29,10 +29,10 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="frontend/assets/img/patients/patient.jpg" alt="User Image">
+											<img src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" alt="User Image">
 										</a>
 										<div class="profile-det-info">
-											<h3>Richard Wilson</h3>
+											<h3>{{ Auth::guard('patient')->user()->first_name }}</h3>
 											<div class="patient-details">
 												<h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
 												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
@@ -93,48 +93,49 @@
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-									<form>
+									<form action="{{ route('edit.profile') }}" method="POST" enctype="multipart/form-data">
+										@csrf
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
 												<div class="form-group">
 													<div class="change-avatar">
 														<div class="profile-img">
-															<img src="frontend/assets/img/patients/patient.jpg" alt="User Image">
+															<img src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" alt="User Image">
 														</div>
 														<div class="upload-img">
 															<div class="change-photo-btn">
 																<span><i class="fa fa-upload"></i> Upload Photo</span>
-																<input type="file" class="upload">
+																<input name="old_photo" type="file" class="upload">
 															</div>
 															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
+											 <div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>First Name</label>
-													<input type="text" class="form-control" value="Richard">
+													<input name="first_name" type="text" value="{{ Auth::guard('patient') -> user() -> first_name }}" class="form-control">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Last Name</label>
-													<input type="text" class="form-control" value="Wilson">
+													<input name="last_name" type="text" value="{{ Auth::guard('patient') -> user() -> last_name }}"class="form-control" >
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Date of Birth</label>
 													<div class="cal-icon">
-														<input type="text" class="form-control datetimepicker" value="24-07-1983">
+														<input name="deta_of_birth" type="text" class="form-control datetimepicker" value="24-07-1983">
 													</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Blood Group</label>
-													<select class="form-control select">
+													<select name="blood_group" class="form-control select">
 														<option>A-</option>
 														<option>A+</option>
 														<option>B-</option>
@@ -161,13 +162,13 @@
 											<div class="col-12">
 												<div class="form-group">
 												<label>Address</label>
-													<input type="text" class="form-control" value="806 Twin Willow Lane">
+													<input name="location" type="text" class="form-control" value="806 Twin Willow Lane">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>City</label>
-													<input type="text" class="form-control" value="Old Forge">
+													<input name="city" type="text" class="form-control" value="Old Forge">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
@@ -185,7 +186,7 @@
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Country</label>
-													<input type="text" class="form-control" value="United States">
+													<input name="country" type="text" class="form-control" value="United States">
 												</div>
 											</div>
 										</div>

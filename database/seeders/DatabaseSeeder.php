@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\patient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +21,22 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+            patient::create([
+                'first_name'         => 'Ovaydul',
+                'email'              => 'ovaydul@gmail.com',
+                'mobile'             => '01726144752',
+                'password'           => 'hbhbhb',
+            ]);
+
+            patient::create([
+                'first_name'         => 'bhuiyan',
+                'email'              => 'bhuiyan@gmail.com',
+                'mobile'             => '01726144756',
+                'password'           => 'hnhnhn',
+            ]);
+            
+
     }
 }

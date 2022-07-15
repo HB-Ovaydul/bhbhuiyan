@@ -100,13 +100,13 @@
 						<li class="nav-item dropdown has-arrow logged-item">
 							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="frontend/assets/img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+									<img class="rounded-circle" src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" width="31" alt="Ryan Taylor">
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<div class="user-header">
 									<div class="avatar avatar-sm">
-										<img src="frontend/assets/img/patients/patient.jpg" alt="User Image" class="avatar-img rounded-circle">
+										<img src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" alt="User Image" class="avatar-img rounded-circle">
 									</div>
 									<div class="user-text">
 										<h6>Richard Wilson</h6>

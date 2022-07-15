@@ -19,14 +19,14 @@ class PatientAuthController extends Controller
 
     // Data Validation
        $this->validate($request,[
-        'first_name'         => ['required'],
-        'email'         => ['required'],
-        'mobile'        => ['required'],
+        'first_name'         => 'required',
+        'email'              => 'required|email|unique:patients',
+        'mobile'             => 'required',
         
        ]);
 
     // Data Create & Register
-       patient::create([
+     patient::create([
         'first_name'      => $request -> first_name,
         'email'           => $request -> email,
         'mobile'          => $request -> mobile,

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
 use App\Models\patient;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class PatientprofileSettingsController extends Controller
 {
@@ -30,9 +31,9 @@ class PatientprofileSettingsController extends Controller
     public function ChangePassword(Request $request)
     {
       $this->validate($request,[
-        'old_pass'                   => ['required'],
-        'new_password'               => ['required'],
-        'password_confirmation'      => ['required'],
+        'old_pass'                   => 'required',
+        'new_password'               => 'required',
+        'password_confirmation'      => 'required',
       ]);
 
       // Password Verify
@@ -55,7 +56,51 @@ class PatientprofileSettingsController extends Controller
      ]);
 
      return redirect() -> route('show.login.page') -> with('success', 'Your Password Changed!');
-      
 
     }
-}
+  
+    /**
+     * Edit Patient Profile
+     */
+    public function EditPatientProf(Request $request)
+    {
+      // Image Upload
+
+      // dd(Auth::guard('patient')->user());
+
+      if($request -> hasFile ('old_photo')){
+        $img = $request -> file('old_photo');
+        $file_name = md5(time().rand()) .'.'. $img -> clientExtension();
+        $photo_up = Image::make ($img -> getRealPath()); 
+        $photo_up -> save( storage_path('app/public/Patient_photos/') . $file_name );
+
+        // unlink('storage/Patient_photos/' . $request -> old_photo);
+
+        // $img -> move(storage_path('app/public/Patient_photos/'),$file_name);
+      }else{
+         $file_name = null;
+      }
+
+      //  dd(Auth::guard('patient')->user());
+
+       patient::find(Auth::guard('patient')->id())->update([
+        'first_name'        => $request ->first_name,
+        'last_name'         => $request ->last_name,
+        'photo'             => $file_name,
+        'adress'            => $request -> adress,
+        'blood_group'       => $request -> blood_group,
+        'country'           => $request -> country,
+        'city'              => $request -> city,
+        'location'          => $request -> location,
+        'deta_of_birth'     => $request -> deta_of_birth,
+        ]);
+
+        return back();
+
+      }
+
+
+        
+    }
+
+

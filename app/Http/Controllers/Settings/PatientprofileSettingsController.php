@@ -64,9 +64,9 @@ class PatientprofileSettingsController extends Controller
      */
     public function EditPatientProf(Request $request)
     {
-      // Image Upload
 
-      // dd(Auth::guard('patient')->user());
+  
+      // Image Upload
 
       if($request -> hasFile ('old_photo')){
         $img = $request -> file('old_photo');
@@ -78,10 +78,12 @@ class PatientprofileSettingsController extends Controller
 
         // $img -> move(storage_path('app/public/Patient_photos/'),$file_name);
       }else{
-         $file_name = null;
+         $file_name = $request ->old_photo;
       }
-
+      // Data Test
       //  dd(Auth::guard('patient')->user());
+
+      // Patient Data Update
 
        patient::find(Auth::guard('patient')->id())->update([
         'first_name'        => $request ->first_name,

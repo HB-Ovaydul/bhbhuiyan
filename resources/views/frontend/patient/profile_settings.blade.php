@@ -128,21 +128,32 @@
 												<div class="form-group">
 													<label>Date of Birth</label>
 													<div class="cal-icon">
-														<input name="deta_of_birth" type="text" class="form-control datetimepicker" value="24-07-1983">
+														<input name="deta_of_birth" type="text" class="form-control datetimepicker" value="{{ Auth::guard('patient') -> user() -> deta_of_birth }}">
 													</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Blood Group</label>
-													<select name="blood_group" class="form-control select">
-														<option>A-</option>
-														<option>A+</option>
-														<option>B-</option>
-														<option>B+</option>
-														<option>AB-</option>
-														<option>AB+</option>
-														<option>O-</option>
+													<select id="soldiers_id" name="blood_group" class="form-control select">
+
+														{{-- @foreach ($soldiers as $soldier)
+														@if(isset($soldier) && !empty($soldier))
+															<option value="{{ Auth::guard('patient')->user()->soldier->id }}" {{ Auth::guard('patient')->soldier->id == Auth::guard('patient')->user()->soldiers_id ? 'selected' : '' }} 
+																value="{{ Auth::guard('patient')->user()->soldier->id }}">{{ Auth::guard('patient')->user()->soldier->blood_group}}</option>
+
+																@else
+																	null
+																@endif
+														@endforeach --}}
+														
+														<option >A-</option>
+														<option >A+</option>
+														<option >B-</option>
+														<option >B+</option>
+														<option >AB-</option>
+														<option >AB+</option>
+														<option >O-</option>
 														<option>O+</option>
 													</select>
 												</div>
@@ -150,25 +161,25 @@
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Email ID</label>
-													<input type="email" class="form-control" value="richard@example.com">
+													<input type="email" class="form-control" value="{{ Auth::guard('patient') -> user() -> email }}">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Mobile</label>
-													<input type="text" value="+1 202-555-0125" class="form-control">
+													<input type="text" value="{{ Auth::guard('patient') -> user() -> mobile }}" class="form-control">
 												</div>
 											</div>
 											<div class="col-12">
 												<div class="form-group">
 												<label>Address</label>
-													<input name="location" type="text" class="form-control" value="806 Twin Willow Lane">
+													<input name="location" type="text" class="form-control" value="{{ Auth::guard('patient') -> user() -> location }}">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>City</label>
-													<input name="city" type="text" class="form-control" value="Old Forge">
+													<input name="city" type="text" class="form-control" value="{{ Auth::guard('patient') -> user() -> city }}">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
@@ -186,7 +197,7 @@
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Country</label>
-													<input name="country" type="text" class="form-control" value="United States">
+													<input name="country" type="text" class="form-control" value="{{ Auth::guard('patient') -> user() -> country }}">
 												</div>
 											</div>
 										</div>

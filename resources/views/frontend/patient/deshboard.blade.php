@@ -31,7 +31,7 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" alt="User Image">
+											{{-- <img src="{{ url('storage/patient_photos', Auth::guard('patient') -> user() -> photo) }}" alt="User Image"> --}}
 										</a>
 										<div class="profile-det-info">
 											<h3>{{ Auth::guard('patient')->user()->first_name }}</h3>

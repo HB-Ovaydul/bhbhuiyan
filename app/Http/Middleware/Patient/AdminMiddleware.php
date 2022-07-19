@@ -5,7 +5,7 @@ namespace App\Http\Middleware\Patient;
 use Closure;
 use Illuminate\Http\Request;
 
-class PatientMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class PatientMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-    
+        
         return $next($request);
     }
 }

@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('country') -> nullable();
             $table->string('city') -> nullable();
             $table->string('location') -> nullable();
-            $table->boolean('status') ->default(true);
+            $table->string('access_token') -> nullable();
+            $table->boolean('status') ->default(false);
             $table->boolean('trash') ->default(false);
             $table->timestamps();
         });

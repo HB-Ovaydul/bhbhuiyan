@@ -10,7 +10,7 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
  */
 
  Route::get('/', [ FrontendController::class, 'ShowHomePage' ]) -> name('home.page');
- Route::get('/login-page', [ FrontendController::class, 'ShowLoginPage' ]) -> name('show.login.page');
+ Route::get('/login-page', [ FrontendController::class, 'ShowLoginPage' ]) -> name('show.login.page') -> middleware('Admin.Redirect');
 
  /**
   * Patient Routes
@@ -21,6 +21,7 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
   Route::post('/patient-register' ,[PatientAuthController::class,'PatientRegister'])->name('patient.register');
   Route::post('/patient-login' ,[PatientAuthController::class,'PatientLogin'])->name('patient.login');
   Route::get('/patient-logout' ,[PatientAuthController::class,'Logout'])->name('patient.logout');
+  Route::get('/patient_access_account/{token?}' ,[PatientAuthController::class,'PatientAccountActiveToken'])->name('patient.access.account');
 
   /**
    * Patient Profile Sidbar routes
@@ -28,7 +29,8 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
   Route::get('/patient-Profile-settings' ,[PatientprofileSettingsController::class,'ShowPatientProfSettings'])->name('patient.prof.settings') -> middleware('patient');
   Route::get('/patient-change-password' ,[PatientprofileSettingsController::class,'ShowPatientChangePass']) ->name('patient.change.pass') -> middleware('patient');
   Route::post('/change-password' ,[PatientprofileSettingsController::class,'ChangePassword'])->name('change.password') -> middleware('patient');
-  Route::post('/edit-profile' ,[PatientprofileSettingsController::class,'EditPatientProf'])->name('edit.profile');
+  Route::post('/edit-profile' ,[PatientprofileSettingsController::class,'EditPatientProf'])->name('edit.profile') -> middleware('patient');
+  
 
 
  /**

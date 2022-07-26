@@ -22,6 +22,14 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
   Route::post('/patient-login' ,[PatientAuthController::class,'PatientLogin'])->name('patient.login');
   Route::get('/patient-logout' ,[PatientAuthController::class,'Logout'])->name('patient.logout');
   Route::get('/patient_access_account/{token?}' ,[PatientAuthController::class,'PatientAccountActiveToken'])->name('patient.access.account');
+  /**
+   * Forget Password Routs
+   */
+  Route::get('/forget-password' ,[PatientAuthController::class,'ForgetPassword'])->name('forget.password') -> middleware('patient');
+  Route::post('/reset-password' ,[PatientAuthController::class,'passwordForgetCheck'])->name('password.forget.check'); 
+  Route::get('/patient-password-reset-page/{email}/' ,[PatientAuthController::class,'passwordResetpage'])->name('password.reset.token'); 
+  Route::post('/patient-password-reset' ,[PatientAuthController::class,'passwordreset'])->name('password.reset.page'); 
+ 
 
   /**
    * Patient Profile Sidbar routes
@@ -30,6 +38,8 @@ use App\Http\Controllers\Settings\PatientprofileSettingsController;
   Route::get('/patient-change-password' ,[PatientprofileSettingsController::class,'ShowPatientChangePass']) ->name('patient.change.pass') -> middleware('patient');
   Route::post('/change-password' ,[PatientprofileSettingsController::class,'ChangePassword'])->name('change.password') -> middleware('patient');
   Route::post('/edit-profile' ,[PatientprofileSettingsController::class,'EditPatientProf'])->name('edit.profile') -> middleware('patient');
+
+
   
 
 

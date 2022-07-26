@@ -100,8 +100,6 @@ class PatientprofileSettingsController extends Controller
         return back();
 
       }
-
-
         
     }
 

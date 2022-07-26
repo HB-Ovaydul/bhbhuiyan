@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use passwords;
+use Carbon\Carbon;
 use App\Models\patient;
-use App\Notifications\PatientAccountNotification;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\password_reset;
+use App\Models\patient_reset;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Notifications\ForgotPassword;
+use App\Notifications\PatientAccountNotification;
 
 class PatientAuthController extends Controller
 {
@@ -42,8 +50,9 @@ class PatientAuthController extends Controller
        // Account Acrtivetion link
        $patient -> notify(new PatientAccountNotification($patient));
 
-
     return redirect() -> route('show.login.page') -> with('success', 'Account Successful, Now Login Please');
+
+
 
      }
 
@@ -119,12 +128,94 @@ class PatientAuthController extends Controller
 
         }
 
-          
-
         }
-
-
 
      }
 
+
+     /**
+     * Forget Password Method
+     */
+
+    public function ForgetPassword()
+    {
+      return view('frontend.forget_pass');
+    }
+
+/**
+ * Forget Password Get Link And Reset System
+ */
+public function passwordForgetCheck(Request $request)
+{ 
+  // Email Valitade 
+  $request -> validate([
+      'email'=>'required|email|exists:patients,email',
+    ]);
+
+    // Create token
+
+    // $token = str::random(60);
+    $token = md5(time().rand());
+    patient_reset::create([
+      'email' => $request -> email,
+      'token' => $token,
+    ]);
+    // Create forget Data
+  
+
+    // Forget Notification send Massage
+    // $reset_token -> notify(new ForgotPassword($reset_token));
+    
+    // checking Notify
+    // if($reset_token){
+    //   return back() -> with('success', 'Notify Done');
+    // }else{
+    //   return back() -> with('danger', 'Notify Failed');
+    // }
+  }
+
+/**
+ * Token Get Method in Url
+ */
+public function passwordResetpage(Request $request, $token,$email)
+{
+  return view('frontend.reset_page')->with([ 'token'=>$token, 'email'=>$request->email ]);
 }
+
+/**
+ * Password Reset page & Change Password
+ */
+// public function passwordreset(Request $request)
+// {
+//   // Validate 
+//     $this->validate($request,[
+//       'email' => 'required|email|exists:patients,email',
+//       'password' => 'password|confirmed',
+//       'password_confirmation' => 'required',
+//     ]);
+
+// // Token check
+
+// $check_token = Reset_password::where([ 'email' => $request -> email, 'token'  => $request -> token ])->first();
+
+// // Checking reset Token
+
+// if(!$check_token){
+//     return back() -> with("danger", "Your Email Did't Match");
+// }else{
+//   patient::where('email', $request -> email)->update([
+
+//     'password' => Hash::make($request -> password)
+
+//   ]);
+// }
+
+
+// Reset_password::where([
+//   'email' => $request -> email,
+// ])->delete();
+
+// return redirect() -> route('show.login.page') -> with('success', 'Youre password Reset Done, Now Log In');
+}
+
+

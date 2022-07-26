@@ -7,12 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PatientAccountNotification extends Notification
+class ForgotPassword extends Notification
 {
-    use Queueable;
-
+    use Queueable; 
+    private $email;
     private $token;
-    private $name;
+   
     
 
     /**
@@ -20,12 +20,10 @@ class PatientAccountNotification extends Notification
      *
      * @return void
      */
-    public function __construct($patient)
-
-    {   
-        
-        $this -> token  = $patient -> access_token;
-        $this -> name   = $patient -> first_name;
+    public function __construct($reset_token)
+    {
+        $this->email = $reset_token-> email;
+        $this->token = $reset_token-> token;
         
     }
 
@@ -49,11 +47,9 @@ class PatientAccountNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Assalamu Alaikum.' .$this->name.' '. 'Confirm Your Account, Press The Active Link' )
-                    ->action('Activate', url('/patient_access_account/'.$this->token))
+                    ->line('Your password reset now.')
+                    ->action('Action', url('/patient-password-reset-page/'. $this->email .'/'.$this->token))
                     ->line('Thank you for using our application!');
-
-                    
     }
 
     /**
